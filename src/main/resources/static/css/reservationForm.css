@@ -1,0 +1,26 @@
+.reservationForm .flightDetails {
+	border: 1px solid #E6EBEF;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 20px;
+	margin-bottom: 20px;
+	width: 70%;
+	background-color: #F0F3F5;
+}
+
+.reservationForm .flightDetails h2,h3,h4 {
+	margin: 0;
+}
+
+.reservationForm .flightDetails p {
+	margin: 0;
+}
+
+.reservationForm .passengerInfo p {
+	margin: 0;
+}
+
+.reservationForm .passengerInfo .addressHeader, .formHeader {
+	margin: 10px 0;
+}

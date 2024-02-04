@@ -1,0 +1,12 @@
+.roles h1 {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.roles form {
+	padding-bottom: 20px;
+}
+
+.roles form .btnUpdate, .btnDelete {
+	margin-right: 5px;
+}

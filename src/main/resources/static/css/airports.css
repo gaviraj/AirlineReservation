@@ -1,0 +1,19 @@
+.airports h1 {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.airports form {
+	padding-bottom: 20px;
+}
+
+.airports form .btnUpdate, .btnDelete {
+	margin-right: 5px;
+}
+
+.airports .labeledInputSection label img {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	height: 16px;
+}

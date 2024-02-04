@@ -1,0 +1,107 @@
+
+#navbar {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 20px;
+	border-bottom: 1px solid lightgray;
+}
+
+#navbar #signIn {
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	background-color: transparent;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 0px 18px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+}
+
+#navbar #adminBtn {
+	border-radius: 5px;
+}
+
+#navbar #signIn:hover, #adminBtn:hover {
+	background-color: #E6EBEF;
+}
+
+#navbar #trip {
+	border: none;
+	background-color: transparent;
+	height: fit-content;
+	padding: 6px;
+	border-radius: 5px;
+	display: flex;
+	cursor: pointer;
+}
+
+#adminBtn {
+	background-color: transparent;
+	border: none;
+	display: flex;
+	cursor: pointer;
+}
+
+#navbar #trip:hover, #menuBtn:hover  {
+	background-color: #E6EBEF;
+}
+
+#navbar #menuBtn:hover  {
+	background-color: #E6EBEF;
+}
+
+#navbar #menuBtn {
+	background-color: transparent;
+	border: none;
+	padding: 6px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#navbar a {
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	border-radius: 5px;
+}
+
+#navbar a.active {
+	background-color: #E6EBEF;
+}
+
+
+#navbar #logo {
+	width: 125px; 
+	height: auto;
+}
+
+#navbar #userIcon, #heart {
+	width: 18px;
+}
+
+#navbar #admin {
+	width: 16px; 
+	padding: 4px;
+}
+
+#navbar #menu {
+	width: 14px;
+}
+
+.navbarRight, .navbarLeft {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+#signInText {
+	font-size: 14px;
+}
+
+#navbar #user {
+	width: 20px;
+	padding: 4px;
+}

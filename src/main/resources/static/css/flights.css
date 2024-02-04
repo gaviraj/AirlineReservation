@@ -1,0 +1,97 @@
+.flights h1 {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.flights .switch {
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.flights .switch:hover {
+	background-color: #E6EBEF;
+}
+
+.flights .switch img {
+	height: 20px;
+	margin: auto;
+}
+
+.flights form {
+	display: flex;
+	margin-bottom: 40px;
+}
+
+.flights form #searchSubmit {
+	border: none;
+	border-radius: 5px;
+	padding: 0 30px;
+	background-color: #FF6A07;
+	cursor: pointer;
+}
+
+.flights form #searchSubmit:hover {
+	background-color: rgb(231, 97, 7);
+}
+
+.flights form #searchSubmit img {
+	height: 20px;
+}
+
+.flights .result {
+	border: 1px solid #E6EBEF;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 20px;
+	margin-bottom: 20px;
+	/* width: 70%; */
+	background-color: #F0F3F5;
+}
+
+.flights .resultAirline h3 {
+	margin: 0;
+}
+
+.flights .resultAirline p {
+	margin: 0;
+}
+
+.flights .resultDetails {
+	display: flex;
+	gap: 30px;
+	border-left: 1px solid rgb(207, 212, 217);
+	padding-left: 20px;
+}
+
+.flights .resultDetails p {
+	margin: 0;
+}
+
+.flights .resultDetails h4 {
+	margin: 0;
+}
+
+.flights .resultBook {
+	border-left: 1px solid rgb(207, 212, 217);
+	padding-left: 20px;
+	position: relative;
+	text-align: right;
+}
+
+.flights .resultBook p {
+	padding-bottom: 10px;
+}
+
+.flights .price {
+	text-align: right;
+	margin: 0;
+	padding-bottom: 60px;
+}
+
+.flights .result:hover {
+	background-color: #E6EBEF;
+}

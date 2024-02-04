@@ -1,0 +1,52 @@
+.users h1 {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.users form {
+	padding-bottom: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.users form .btnUpdate, .btnDelete {
+	margin-right: 10px;
+}
+
+.users form #emailIcon {
+	height: 16px;
+}
+
+.checkboxContainer {
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+	float: left;
+	border: 1px solid #212A30;
+	box-sizing: border-box;
+	border-radius: 5px;
+	padding: 2px 5px;
+	margin: 3px;
+	font-size: 14px;
+
+}
+
+.checkboxContainer input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.checkboxContainer:has(input[type="checkbox"]:checked) {
+	background-color: #FF6A07;
+	color: white;
+}
+
+.rolesSection {
+	display: inline-block;
+	max-width: 170px;
+}

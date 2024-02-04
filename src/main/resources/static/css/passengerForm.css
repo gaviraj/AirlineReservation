@@ -1,0 +1,45 @@
+.passengerForm .flightDetails {
+	border: 1px solid #E6EBEF;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 20px;
+	margin-bottom: 20px;
+	width: 70%;
+	background-color: #F0F3F5;
+}
+
+.passengerForm .flightDetails h2,h3,h4 {
+	margin: 0;
+}
+
+.passengerForm .flightDetails p {
+	margin: 0;
+}
+
+.passengerForm #emailIcon {
+	width: 16px;
+}
+.passengerForm #dobIcon {
+	width: 14px;
+}
+
+.passengerForm form input[type="date"] {
+	margin-right: 0;
+}
+
+.passengerForm form .addressInput {
+	background-color: #F0F3F5;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+.passengerForm .formHeader, .addressHeader {
+	padding-bottom: 10px;
+}
+
+.passengerForm form input[type="date"] {
+	padding-left: 40px;
+}

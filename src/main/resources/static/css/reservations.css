@@ -1,0 +1,23 @@
+.reservations #checkedBags {
+	background-color: #E6EBEF;
+	text-align: center;
+	padding-left: 10px;
+}
+
+.reservations #checkedBags:hover {
+	background-color: rgb(215, 219, 223);
+}
+
+.reservations #errors {
+	margin-top: 0;
+	text-align: right;
+	color: red;
+}
+
+.reservations .trueCheckedBags {
+	text-align: center;
+}
+
+.reservations .checkedIcon {
+	width: 16px;
+}

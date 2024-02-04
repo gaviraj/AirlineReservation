@@ -1,0 +1,16 @@
+.flightForm h1 {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.flightForm form {
+	padding-bottom: 20px;
+}
+
+.flightForm form .btnUpdate, .btnDelete {
+	margin-right: 5px;
+}
+
+.flightForm .table {
+	position: relative;
+}

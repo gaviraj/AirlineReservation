@@ -1,0 +1,24 @@
+.passengers h1 {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.passengers form {
+	padding-bottom: 20px;
+}
+
+.passengers form .btnUpdate, .btnDelete {
+	margin-right: 10px;
+}
+
+.passengers form #emailIcon {
+	height: 16px;
+}
+
+.passengers form .addressInput {
+	background-color: #F0F3F5;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	margin-right: 10px;
+}

@@ -1,0 +1,12 @@
+.airlines h1 {
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.airlines form {
+	padding-bottom: 20px;
+}
+
+.airlines form .btnUpdate, .btnDelete {
+	margin-right: 5px;
+}

@@ -1,0 +1,15 @@
+.accessDenied h2 {
+	margin: 0;
+}
+
+.accessDenied {
+	padding-bottom: 200px;
+}
+
+.accessDenied a {
+	color: #FF6A07;
+}
+
+.accessDenied a:hover {
+	color: rgb(231, 97, 7);
+}

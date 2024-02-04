@@ -1,0 +1,14 @@
+.admin h1 {
+	margin: 0;
+	padding-bottom: 10px;
+}
+
+.admin h2 {
+	margin: 0;
+	padding-bottom: 10px;
+	padding-top: 25px;
+}
+
+.admin a {
+	margin-right: 10px;
+}

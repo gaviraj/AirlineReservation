@@ -1,0 +1,24 @@
+.loginContainer {
+	overflow-y: visible;
+}
+
+.login {
+	text-align: center;
+	height: fit-content;
+}
+
+.login #logo {
+	width: 200px;
+}
+
+.login .labeledInputSection {
+	margin-right: 0;
+}
+
+.login a {
+	color: #FF6A07;
+}
+
+.login a:hover {
+	color: rgb(231, 97, 7);
+}

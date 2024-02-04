@@ -1,0 +1,31 @@
+.signUpContainer {
+	overflow-y: visible;
+}
+
+.signUp {
+	text-align: center;
+}
+
+.signUp #logo {
+	width: 200px;
+}
+
+.signUp .labeledInputSection {
+	margin-right: 0;
+}
+
+.signUp form #emailIcon {
+	height: 16px;
+}
+
+.signUp .errorMessage:not(:last-of-type) {
+	margin-bottom: 0;
+}
+
+.signUp a {
+	color: #FF6A07;
+}
+
+.signUp a:hover {
+	color: rgb(231, 97, 7);
+}
