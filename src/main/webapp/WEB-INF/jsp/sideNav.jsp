@@ -74,44 +74,44 @@ $(document).ready(function() {
 			<span class="menuText">Flights</span>
 		</button>
 	</a>
-	<a class="" href="#">
+	<a class="" href="/underConstruction">
 		<button id="stays">
 			<img src="${pageContext.request.contextPath}/img/bed-solid.svg" alt="bed" id="bed" />
 			<span class="menuText">Stays</span>
 		</button>
 	</a>
-	<a class="" href="#">
+	<a class="" href="/underConstruction">
 		<button id="cars">
 			<img src="${pageContext.request.contextPath}/img/car-solid.svg" alt="car" id="car" />
 			<span class="menuText">Cars</span>
 		</button>
 	</a>
-	<a class="" href="#">
+	<a class="" href="/underConstruction">
 		<button id="packages">
 			<img src="${pageContext.request.contextPath}/img/tree-city-solid.svg" alt="tree and building" id="package" />
 			<span class="menuText">Packages</span>
 		</button>
 	</a>
-	<a class="" href="#">
+	<a class="" href="/underConstruction">
 		<button id="trainsBuses">
 			<img src="${pageContext.request.contextPath}/img/train-solid.svg" alt="train" id="train" />
 			<span class="menuText">Trains and buses</span>
 		</button>
 	</a>
 	<div class="line"></div>
-	<a class="" href="#">
+	<a class="" href="/underConstruction">
 		<button id="explore">
 			<img src="${pageContext.request.contextPath}/img/globe-solid.svg" alt="globe" id="explore" />
 			<span class="menuText">Explore</span>
 		</button>
 	</a>
-	<a class="" href="#">
+	<a class="" href="/underConstruction">
 		<button id="tracker">
 			<img src="${pageContext.request.contextPath}/img/location-crosshairs-solid.svg" alt="location crosshairs" id="tracker" />
 			<span class="menuText">Flight Tracker</span>
 		</button>
 	</a>
-	<a class="" href="#">
+	<a class="" href="/underConstruction">
 		<button id="tips">
 			<img src="${pageContext.request.contextPath}/img/newspaper-solid.svg" alt="newspaper" id="tips" />
 			<span class="menuText">Travel tips</span>

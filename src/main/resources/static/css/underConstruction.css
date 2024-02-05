@@ -1,0 +1,21 @@
+.underConstruction h1 {
+	margin: 0;
+}
+
+.underConstruction h4 {
+	margin: 0;
+	padding: 10px 0;
+}
+
+
+.underConstruction {
+	padding-bottom: 200px;
+}
+
+.underConstruction a {
+	color: #FF6A07;
+}
+
+.underConstruction a:hover {
+	color: rgb(231, 97, 7);
+}

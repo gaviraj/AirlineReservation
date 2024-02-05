@@ -40,7 +40,8 @@ public class SecurityConfig {
 				AntPathRequestMatcher.antMatcher("/passengerForm"),
 				AntPathRequestMatcher.antMatcher("/savePassenger"),		
 				AntPathRequestMatcher.antMatcher("/saveReservation"),
-				AntPathRequestMatcher.antMatcher("/reservationSuccess")
+				AntPathRequestMatcher.antMatcher("/reservationSuccess"),
+				AntPathRequestMatcher.antMatcher("/underConstruction")
 		).permitAll()
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/login")).permitAll()
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/signUp")).permitAll()

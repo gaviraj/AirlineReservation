@@ -125,4 +125,9 @@ public class LoginController {
 	public String accessDenied() {
 		return "accessDenied";
 	} 
+	
+	@RequestMapping("underConstruction")
+	public String underConstruction() {
+		return "underConstruction";
+	}
 }
