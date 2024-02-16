@@ -1,8 +1,5 @@
 package com.synergisticit.controller;
 
-import java.security.Principal;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,6 @@ import com.synergisticit.domain.Flight;
 import com.synergisticit.domain.Gender;
 import com.synergisticit.domain.Passenger;
 import com.synergisticit.domain.Reservation;
-import com.synergisticit.domain.User;
 import com.synergisticit.service.FlightService;
 import com.synergisticit.service.PassengerService;
 import com.synergisticit.service.ReservationService;
