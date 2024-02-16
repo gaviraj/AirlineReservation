@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,4 +86,18 @@ public class ReservationRestController {
 			return new ResponseEntity<Reservation>(newReservation, headers, HttpStatus.CREATED);
 		}
 	}
+	
+	@PutMapping(value = "checkIn", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Reservation> checkIn(@RequestParam Long reservationNumber, @RequestParam int checkedBags) {
+		System.out.println("PassengerRestController.checkIn()...");
+		Reservation reservation = reservationService.findById(reservationNumber);
+		if (reservation == null) {
+			return new ResponseEntity<Reservation>(reservation, HttpStatus.NOT_FOUND);
+		} else {
+			reservation.setCheckedBags(checkedBags);
+			reservation.setCheckedIn(true);
+			reservationService.saveReservation(reservation);
+			return new ResponseEntity<Reservation>(reservation, HttpStatus.FOUND);
+		}
+	} 
 }
