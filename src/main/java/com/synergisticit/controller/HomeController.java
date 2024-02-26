@@ -46,7 +46,7 @@ public class HomeController {
 		if (fromCity.isEmpty()) {
 			mav.addObject("dateInputError", "please enter departure city");
 		} else if (toCity.isBlank()) {
-			mav.addObject("dateInputError", "please enter arrival date");
+			mav.addObject("dateInputError", "please enter arrival city");
 		} else if (fromDate.isEmpty()) {
 			mav.addObject("dateInputError", "please enter departure date");
 		} else if (toDate.isEmpty()) {
