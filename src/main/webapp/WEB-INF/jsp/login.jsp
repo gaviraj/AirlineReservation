@@ -31,7 +31,7 @@
 				<br>
 				<div class="formSection labeledInputSection">
 					<label for="username"><img src="${pageContext.request.contextPath}/img/key-solid.svg" />
-						<input type="text" name="password" placeholder="Password" />
+						<input type="password" onfocus="(this.type='text')" onblur="(this.type='password')" name="password" placeholder="Password" />
 					</label>
 				</div>
 				<br>

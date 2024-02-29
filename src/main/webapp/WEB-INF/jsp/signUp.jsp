@@ -60,7 +60,7 @@
 				<br>
 				<div class="formSection labeledInputSection">
 					<label for="password"><img src="${pageContext.request.contextPath}/img/key-solid.svg" />
-						<input type="text" name="password" path="password" placeholder="Password" />
+						<input type="password" onfocus="(this.type='text')" onblur="(this.type='password')" name="password" path="password" placeholder="Password" />
 					</label>
 				</div>
 				<br>
