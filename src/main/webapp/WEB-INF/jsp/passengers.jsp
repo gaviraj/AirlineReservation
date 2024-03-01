@@ -20,7 +20,7 @@
 		<div class="main passengers">
 			<%@ include file="breadcrumbs.jsp" %>
 			<h1>Passengers</h1>
-			<form:errors path="user.*" cssStyle="color:red;" />
+			<form:errors path="passenger.*" cssStyle="color:red;" />
 			<form:form action="savePassengerAdmin" method="POST" modelAttribute="passenger">
 				<div class="formSection">
 					<form:input type="number" path="passengerId" value="${passenger.getPassengerId()}" placeholder="Passenger id" hidden="true"/>
