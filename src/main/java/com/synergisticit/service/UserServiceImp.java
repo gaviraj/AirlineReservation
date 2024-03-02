@@ -27,14 +27,14 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public List<User> findAll() {
-		//return userRepository.findAll();
-		return userDao.findAll();
+		return userRepository.findAll();
+		//return userDao.findAll();
 	}
 
 	@Override
 	public User findById(Long userId) {
-		//return userRepository.findById(userId).orElse(null);
-		return userDao.findById(userId);
+		return userRepository.findById(userId).orElse(null);
+		//return userDao.findById(userId);
 	}
 
 	@Override
