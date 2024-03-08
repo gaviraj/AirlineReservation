@@ -95,3 +95,19 @@
 .flights .result:hover {
 	background-color: #E6EBEF;
 }
+
+.flights .pageList {
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+	font-size: 18px;
+}
+
+.flights .page {
+	color: #FF6A07;
+}
+
+.flights .currentPage {
+	text-align: center;
+}
+

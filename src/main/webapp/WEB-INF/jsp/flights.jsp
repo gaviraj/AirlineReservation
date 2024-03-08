@@ -54,31 +54,46 @@
 			</form:form>
 			<core:if test="${searchResults.size() == null}">
 				<core:forEach items="${flights}" var="flight">
-				<div class="result">
-					<div class="resultAirline">
-						<h3>${flight.getAirlines().getAirlinesName()}</h3>
-						<p>${flight.getFlightNumber()}</p>
-					</div>
-					<div class="resultDetails">
-						<div>
-							<h4>Depart:</h4>
-							<p>${flight.getDepartureCity()}</p>
-							<p>${flight.getDepartureDate()} ${flight.getDepartureTime()}</p>
-							<br>
-							<h4>Arrive:</h4>
-							<p>${flight.getArrivalCity()}</p>
-							<p>${flight.getArrivalDate()} ${flight.getArrivalTime()}</p>
+					<div class="result">
+						<div class="resultAirline">
+							<h3>${flight.getAirlines().getAirlinesName()}</h3>
+							<p>${flight.getFlightNumber()}</p>
 						</div>
-						<div class="resultBook">
-							<h2 class="price">
-								$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${flight.getTicketPrice()}"/>
-							</h2>
-							<p>${flight.getCapacity() - flight.getSeatsBooked()}/${flight.getCapacity()} seats</p>
-							<a href="/passengerForm?flightId=${flight.getFlightId()}"><button class="btnDefault">Book Now</button></a>
+						<div class="resultDetails">
+							<div>
+								<h4>Depart:</h4>
+								<p>${flight.getDepartureCity()}</p>
+								<p>${flight.getDepartureDate()} ${flight.getDepartureTime()}</p>
+								<br>
+								<h4>Arrive:</h4>
+								<p>${flight.getArrivalCity()}</p>
+								<p>${flight.getArrivalDate()} ${flight.getArrivalTime()}</p>
+							</div>
+							<div class="resultBook">
+								<h2 class="price">
+									$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${flight.getTicketPrice()}"/>
+								</h2>
+								<p>${flight.getCapacity() - flight.getSeatsBooked()}/${flight.getCapacity()} seats</p>
+								<a href="/passengerForm?flightId=${flight.getFlightId()}"><button class="btnDefault">Book Now</button></a>
+							</div>
 						</div>
 					</div>
+				</core:forEach>
+				
+				<div class="pageList">
+					<core:set var="noOfPages" value="${totalPages}"></core:set>
+					<core:set var="sortedBy" value="${sortedBy}"></core:set>
+					<core:set var="pageSize" value="${pageSize}"></core:set>
+					<%
+					for (int i = 0; i < (int)pageContext.getAttribute("noOfPages"); i++) {
+						//pageContext, out, request, response are some of jsp implicit objects
+						if (i > 0) {
+							out.println("&middot;");
+						}
+						out.println("<a class=\"page\" href=\"flights?pageNo="+i+"&pageSize="+request.getAttribute("pageSize")+"&sortedBy="+request.getAttribute("sortedBy")+"\">"+(i+1)+"</a>");
+					}
+					%>
 				</div>
-			</core:forEach>			
 			</core:if>
 			<core:if test="${searchResults.size() > 0}">
 				<h3>${searchResults.size()} flight(s) found:</h3>

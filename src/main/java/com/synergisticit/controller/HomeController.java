@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +23,7 @@ public class HomeController {
 	
 	@Autowired FlightService flightService;
 
-	@RequestMapping(value = {"/", "flights"})
+	//@RequestMapping(value = {"/", "flights"})
 	public ModelAndView home(Flight flight) {
 		System.out.println("HomeController.home()...");
 		ModelAndView mav = new ModelAndView("flights");
@@ -28,6 +32,27 @@ public class HomeController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = {"/", "flights"})
+	public ModelAndView homePageable(
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "4") int pageSize,
+			@RequestParam(defaultValue = "departureDate") String sortedBy
+	) {
+		ModelAndView mav = new ModelAndView("flights");
+		
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		Page<Flight> pagedFlights = flightService.findAll(pageable);
+		List<Flight> flights = pagedFlights.getContent();
+		
+		mav.addObject("flights", flights);
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedFlights.getTotalPages());
+		
+		return mav;
+	} 
 	
 	@RequestMapping("searchFlights")
 	public ModelAndView searchFlights(
