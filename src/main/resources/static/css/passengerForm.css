@@ -17,7 +17,7 @@
 	margin: 0;
 }
 
-.passengerForm #emailIcon {
+.passengerForm #emailIcon, #numPassengers {
 	width: 16px;
 }
 .passengerForm #dobIcon {
@@ -42,4 +42,14 @@
 
 .passengerForm form input[type="date"] {
 	padding-left: 40px;
+}
+
+.passengerForm #errors p {
+	margin: 0;
+	margin-top: 10px;
+	color: red
+}
+
+.passengerForm .highlight {
+	color: #FF6A07;
 }
