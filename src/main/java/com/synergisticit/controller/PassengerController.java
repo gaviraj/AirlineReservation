@@ -1,12 +1,18 @@
 package com.synergisticit.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.synergisticit.domain.Flight;
 import com.synergisticit.domain.Gender;
 import com.synergisticit.domain.Passenger;
-import com.synergisticit.domain.User;
 import com.synergisticit.service.FlightService;
 import com.synergisticit.service.PassengerService;
 import com.synergisticit.validation.PassengerValidator;
@@ -34,6 +39,7 @@ public class PassengerController {
 		//binder.addValidators(passengerValidator);
 	}
 	
+	
 	@RequestMapping("passengerForm")
 	public ModelAndView passengerForm(Passenger passenger, @RequestParam Long flightId) {
 		System.out.println("PassengerController.passengerForm()...");
@@ -43,8 +49,68 @@ public class PassengerController {
 		Flight flight = flightService.findById(flightId);
 		mav.addObject("flight", flight);
 		mav.addObject("genders", Gender.values());
+		//mav.addObject("passengerList", passengers);
 		
 		return mav;
+	}
+	
+	@RequestMapping("addPassengers")
+	public ModelAndView totalPassengers(@Valid @ModelAttribute Passenger passenger, int numOfPassengers, @RequestParam Long flightId) {
+		ModelAndView mav = new ModelAndView("passengerForm");
+		Flight flight = flightService.findById(flightId);
+		mav.addObject("flight", flight);
+		mav.addObject("genders", Gender.values());
+		
+		List<Passenger> passengers = new ArrayList<Passenger>();
+		System.out.println("num of pass: " + numOfPassengers);
+		for (int i = 1; i <= numOfPassengers; i++) {
+			passengers.add(new Passenger());
+		}
+		mav.addObject("passengerList", passengers);
+		
+		return mav;
+	} 
+	
+	@RequestMapping("savePassengers")
+	public ResponseEntity<?> savePassengesr(@RequestBody List<Passenger> passengers, @RequestParam Long flightId) {
+		ModelAndView mav = new ModelAndView("passengerForm");
+		List<Passenger> savedPassengers = new ArrayList<Passenger>();
+		for (Passenger passenger : passengers) {
+			Passenger newPassenger = passengerService.savePassenger(passenger);
+			if (newPassenger != null) {
+				savedPassengers.add(newPassenger);
+			}
+		}
+		mav.addObject("passengers", savedPassengers);
+		
+		Flight flight = flightService.findById(flightId);
+		
+		if (savedPassengers.size() == passengers.size()) {
+			StringBuilder redirectString = new StringBuilder("/reservationForm?flightId=" + flightId + "&passengerIds=");
+			boolean more = true;
+			for (int i = 0; i < savedPassengers.size(); i++) {
+				redirectString.append(savedPassengers.get(i).getPassengerId());
+				if (more == true && i < savedPassengers.size() - 1) {
+					redirectString.append(",");
+				} else {
+					more = false;
+				}
+			}
+			System.out.println(redirectString.toString());
+			//mav.setViewName("redirect:reservationForm2?flightId=" + flightId + "&passengerIds=");
+			//mav.setViewName(redirectString.toString());
+			mav.addObject("redirect", redirectString);
+			return new ResponseEntity<List<Passenger>>(savedPassengers, HttpStatus.OK);
+		} else {
+			mav.addObject("flight", flight);
+			mav.addObject("genders", Gender.values());
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		//System.out.println("flightid: " + flightId);
+		
+		//return mav;
 	}
 	
 	@RequestMapping("savePassenger")

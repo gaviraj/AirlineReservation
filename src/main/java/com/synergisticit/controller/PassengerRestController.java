@@ -29,7 +29,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("passengers")
-@Secured({"DBA", "Admin"})
 public class PassengerRestController {
 
 	@Autowired PassengerService passengerService;
@@ -41,6 +40,7 @@ public class PassengerRestController {
 	}
 	
 	@GetMapping(value = "findAll")
+	@Secured({"DBA", "Admin"})
 	public ResponseEntity<List<Passenger>> findAll() {
 		System.out.println("PassengerRestController.findAll()...");
 		List<Passenger> passengers = passengerService.findAll();
@@ -52,6 +52,7 @@ public class PassengerRestController {
 	} 
 	
 	@GetMapping(value = "findById", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Secured({"DBA", "Admin"})
 	public ResponseEntity<Passenger> findById(@RequestParam Long passengerId) {
 		System.out.println("PassengerRestController.findById()...");
 		Passenger passenger = passengerService.findById(passengerId);
@@ -63,6 +64,7 @@ public class PassengerRestController {
 	} 
 	
 	@PostMapping(value = "save", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Secured({"DBA", "Admin"})
 	public ResponseEntity<?> savePassenger(@Valid @RequestBody Passenger passenger, BindingResult br) {
 		System.out.println("PassengerRestController.savePassenger()...");
 		HttpHeaders headers = new HttpHeaders();
@@ -90,7 +92,14 @@ public class PassengerRestController {
 		}
 	}
 	
+	@PostMapping(value = "saveList", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> saveList(@RequestBody List<Passenger> passengers) {
+		System.out.println(passengers.size());
+		return null;
+	}
+	
 	@PutMapping(value = "update", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Secured({"DBA", "Admin"})
 	public ResponseEntity<?> updatePassenger(@Valid @RequestBody Passenger passenger, BindingResult br) {
 		System.out.println("PassengerRestController.updatePassenger()...");
 		HttpHeaders headers = new HttpHeaders();
@@ -118,6 +127,7 @@ public class PassengerRestController {
 	}
 	
 	@DeleteMapping(value = "delete")
+	@Secured({"DBA", "Admin"})
 	public ResponseEntity<Passenger> delete(@RequestParam Long passengerId) {
 		System.out.println("AirportRestController.delete()...");
 		HttpHeaders headers = new HttpHeaders();
