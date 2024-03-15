@@ -23,6 +23,33 @@
 		<div class="main reservationSuccess">
 			<div class="reservationInfo">
 				<h1>Successfully Booked!</h1>
+				<h3>Flight number: ${reservations.get(0).getFlight().getFlightNumber()}</h3>
+				<div class="flightInfo">
+					<div>
+						<h3>Depart:</h3>
+						<p>${reservations.get(0).getFlight().getDepartureCity()}</p>
+						<p>${reservations.get(0).getFlight().getDepartureDate()} ${reservations.get(0).getFlight().getDepartureTime()}</p>
+					</div>
+					<div>
+						<h3>Arrive:</h3>
+						<p>${reservations.get(0).getFlight().getArrivalCity()}</p>
+						<p>${reservations.get(0).getFlight().getArrivalDate()} ${reservations.get(0).getFlight().getArrivalTime()}</p>
+					</div>
+				</div>
+			</div>
+			<core:forEach items="${reservations}" var="reservation" varStatus="status">
+				<div class="passengerInfo">
+					<h3>Passenger ${status.index+1}: </h3>
+					<h2>Reservation number: ${reservation.getReservationNumber()}</h2>
+					<p>Name: ${reservation.getPassenger().getFirstName()} ${reservation.getPassenger().getLastName()}</p>
+					<p>Email: ${reservation.getPassenger().getEmail()}</p>
+					<p>Phone: ${reservation.getPassenger().getPhoneNum()}</p>
+					<p>Gender: ${reservation.getPassenger().getGender()}</p>
+				</div>
+			</core:forEach>
+			<h2 class="totalPrice">Total: $<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${reservations.get(0).getFlight().getTicketPrice() * reservations.size()}"/></h2>
+			<%-- <div class="reservationInfo">
+				<h1>Successfully Booked!</h1>
 				<h2>Reservation number: ${reservation.getReservationNumber()}</h2>
 				<h3>Flight number: ${reservation.getFlight().getFlightNumber()}</h3>
 				<div class="flightInfo">
@@ -49,7 +76,7 @@
 				<p>${reservation.getPassenger().getAddress().getCountry()}</p>
 				<p>${reservation.getPassenger().getAddress().getZipCode()}</p>
 			</div>
-			<h2 class="totalPrice">Total: $<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${reservation.getFlight().getTicketPrice()}"/></h2>
+			<h2 class="totalPrice">Total: $<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${reservation.getFlight().getTicketPrice()}"/></h2> --%>
 		</div>
 		<%@ include file="footer.jsp" %>
 	</div>

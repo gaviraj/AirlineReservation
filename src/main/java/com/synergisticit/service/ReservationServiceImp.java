@@ -3,6 +3,8 @@ package com.synergisticit.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.synergisticit.domain.Reservation;
@@ -37,6 +39,11 @@ public class ReservationServiceImp implements ReservationService {
 	@Override
 	public List<Reservation> findByPassengerEmail(String email) {
 		return reservationRepository.findByPassengerEmail(email);
+	}
+
+	@Override
+	public Page<Reservation> findAll(Pageable pageable) {
+		return reservationRepository.findAll(pageable);
 	}
 
 }

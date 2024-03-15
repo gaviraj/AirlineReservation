@@ -21,3 +21,25 @@
 .reservations .checkedIcon {
 	width: 16px;
 }
+
+.reservations .pageList {
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+	font-size: 18px;
+	padding-top: 10px;
+}
+
+.reservations .page {
+	color: #FF6A07;
+}
+
+.reservations .sortHeader {
+	color: inherit;
+	text-decoration: none;
+}
+
+.reservations .sortHeader.active {
+	color: #212a30;
+	text-decoration: underline;
+}

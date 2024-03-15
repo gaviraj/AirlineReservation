@@ -10,6 +10,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reservations.css">
 <script src="${pageContext.request.contextPath}/js/formPage.js"></script>
+<script>
+	$(document).ready(function() {
+		$(".sortHeader").click(function() {
+			$(".sortHeader").parent().siblings.children().removeClass("active")
+			$(this).addClass("active")
+			
+		})
+	})
+</script>
 </head>
 <body>
 <body>
@@ -27,13 +36,13 @@
 				<table class="dbList dbListData">
 				<thead>
 					<tr>
-						<th>Reservation Number</th>
-						<th>Passenger</th>
-						<th>Flight</th>
-						<th>Departure:</th>
-						<th>Arrival:</th>
+						<th><a href="reservations?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=reservationNumber" class="sortHeader ${sortedBy == 'reservationNumber' ? 'active' : ''}">Reservation Number</a></th>
+						<th><a href="reservations?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=passenger.firstName" class="sortHeader ${sortedBy == 'passenger.firstName' ? 'active' : ''}">Passenger</a></th>
+						<th><a href="reservations?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=flight.flightNumber" class="sortHeader ${sortedBy == 'flight.flightNumber' ? 'active' : ''}">Flight</a></th>
+						<th><a href="reservations?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=flight.departureDate" class="sortHeader ${sortedBy == 'flight.departureDate' ? 'active' : ''}">Departure</a></th>
+						<th><a href="reservations?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=flight.arrivalDate" class="sortHeader ${sortedBy == 'flight.arrivalDate' ? 'active' : ''}">Arrival</a></th>
 						<th>Checked Bags</th>
-						<th>Checked In</th>
+						<th><a href="reservations?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=checkedIn" class="sortHeader ${sortedBy == 'checkedIn' ? 'active' : ''}">Checked In</a></th>
 						<th></th>
 					</tr>
 				</thead>
@@ -81,6 +90,20 @@
 						</core:forEach>
 					</tbody>
 				</table>
+			</div>
+			<div class="pageList">
+				<core:set var="noOfPages" value="${totalPages}"></core:set>
+				<core:set var="sortedBy" value="${sortedBy}"></core:set>
+				<core:set var="pageSize" value="${pageSize}"></core:set>
+				<%
+				for (int i = 0; i < (int)pageContext.getAttribute("noOfPages"); i++) {
+					//pageContext, out, request, response are some of jsp implicit objects
+					if (i > 0) {
+						out.println("&middot;");
+					}
+					out.println("<a class=\"page\" href=\"reservations?pageNo="+i+"&pageSize="+request.getAttribute("pageSize")+"&sortedBy="+request.getAttribute("sortedBy")+"\">"+(i+1)+"</a>");
+				}
+				%>
 			</div>
 		</div>
 		<%@ include file="footer.jsp" %>

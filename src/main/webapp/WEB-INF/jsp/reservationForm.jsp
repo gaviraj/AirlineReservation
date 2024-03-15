@@ -39,32 +39,39 @@
 				</div>
 				<div class="resultBook">
 					<h2 class="price">
+						${passengers.size()} x
 						$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${flight.getTicketPrice()}"/>
 					</h2>
-					<p>${flight.getCapacity() - flight.getSeatsBooked()}/${flight.getCapacity()} seats</p>
+					<p>${flight.getCapacity() - flight.getSeatsBooked()} seats left</p>
 				</div>
 			</div>
 			<div class="passengerInfo">
 				<h3 class="formHeader">Passenger Information:</h3>
-				<p>Name: ${passenger.getFirstName()} ${passenger.getLastName()}</p>
-				<p>Email: ${passenger.getEmail()}</p>
-				<p>Phone: ${passenger.getPhoneNum()}</p>
-				<p>Gender: ${passenger.getGender()}</p>
-				<p>DOB: ${passenger.getDob()}</p>
-				<h4 class="addressHeader">Address:</h4>
-				<p>${passenger.getAddress().getAddressLine1()} ${passenger.getAddress().getAddressLine2()}</p>
-				<p>${passenger.getAddress().getCity()}, ${passenger.getAddress().getState()}</p>
-				<p>${passenger.getAddress().getCountry()}<p>
-				<p>${passenger.getAddress().getZipCode()}<p>
+				<core:forEach items="${passengers}" var="passenger" varStatus="status">
+					<h4>Passenger ${status.index + 1}:</h4>
+					<p>Name: ${passenger.getFirstName()} ${passenger.getLastName()}</p>
+					<p>Email: ${passenger.getEmail()}</p>
+					<p>Phone: ${passenger.getPhoneNum()}</p>
+					<p>Gender: ${passenger.getGender()}</p>
+					<p>DOB: ${passenger.getDob()}</p>
+					<%-- <h4 class="addressHeader">Address:</h4>
+					<p>${passenger.getAddress().getAddressLine1()} ${passenger.getAddress().getAddressLine2()}</p>
+					<p>${passenger.getAddress().getCity()}, ${passenger.getAddress().getState()}</p>
+					<p>${passenger.getAddress().getCountry()}<p>
+					<p>${passenger.getAddress().getZipCode()}<p> --%>
+					<br>
+				</core:forEach>
 			</div>
-			<form:form action="saveReservation" method="POST" modelAttribute="reservation">
-				<form:input type="number" path="reservationNumber" value="${reservation.getReservationNumber()}" placeholder="reservation number" hidden="true"/>
-				<form:input type="text" path="passenger" value="${passenger.getPassengerId()}" placeholder="passenger" hidden="true"/>
-				<form:input type="text" path="flight" value="${flight.getFlightId()}" placeholder="flight" hidden="true"/>
-				<form:input type="number" path="checkedBags" value="0" placeholder="checked bags" hidden="true"/>
-				<form:input type="text" path="checkedIn" value="false" placeholder="checked in" hidden="true"/>
+			<form action="saveReservations" method="POST">
+				<input type="number" name="reservationNumber" value="${reservation.getReservationNumber()}" placeholder="reservation number" hidden="true"/>
+				<core:forEach items="${passengers}" var="passenger">
+					<input type="text" name="passengers" value="${passenger.getPassengerId()}" placeholder="passenger" hidden="true"/>
+				</core:forEach>
+				<input type="text" name="flight" value="${flight.getFlightId()}" placeholder="flight" hidden="true"/>
+				<input type="number" name="checkedBags" value="0" placeholder="checked bags" hidden="true"/>
+				<input type="text" name="checkedIn" value="false" placeholder="checked in" hidden="true"/>
 				<input type="submit" value="Confirm Booking" />
-			</form:form>
+			</form>
 		</div>
 		<%@ include file="footer.jsp" %>
 	</div>
