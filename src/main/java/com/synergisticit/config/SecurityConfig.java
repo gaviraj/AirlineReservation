@@ -37,16 +37,22 @@ public class SecurityConfig {
 				AntPathRequestMatcher.antMatcher("/flights"),
 				AntPathRequestMatcher.antMatcher("/searchFlights"),
 				AntPathRequestMatcher.antMatcher("/reservationForm"),
+				AntPathRequestMatcher.antMatcher("/reservationForm2"),
 				AntPathRequestMatcher.antMatcher("/passengerForm"),
-				AntPathRequestMatcher.antMatcher("/savePassenger"),		
+				AntPathRequestMatcher.antMatcher("/savePassenger"),
+				AntPathRequestMatcher.antMatcher("/savePassengers/**"),
 				AntPathRequestMatcher.antMatcher("/saveReservation"),
+				AntPathRequestMatcher.antMatcher("/saveReservations"),
 				AntPathRequestMatcher.antMatcher("/reservationSuccess"),
 				AntPathRequestMatcher.antMatcher("/underConstruction"),
-				AntPathRequestMatcher.antMatcher("/userProfile")
+				AntPathRequestMatcher.antMatcher("/userProfile"),
+				AntPathRequestMatcher.antMatcher("/passengers/**")
 		).permitAll()
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/login")).permitAll()
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/signUp")).permitAll()
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/register")).permitAll()
+		.requestMatchers(AntPathRequestMatcher.antMatcher("/addPassengers")).permitAll()
+		.requestMatchers(AntPathRequestMatcher.antMatcher("/addPassengers/**")).permitAll()
 		//.requestMatchers(AntPathRequestMatcher.antMatcher("/branches/**")).permitAll()
 		.requestMatchers(staticResources).permitAll() //permit static files without authentication
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/WEB-INF/jsp/**")).permitAll()
