@@ -153,7 +153,7 @@ button.btnDefault:hover {
 	border: 1px solid black;
 }
 
-.main .labeledInputSection input[type="text"], input[type="number"], select, input[type="password"] {
+.main .labeledInputSection input[type="text"], input[type="number"], select, input[type="password"], input[type="email"] {
 	border: none;
 	background-color: transparent;
 	padding: 10px;
@@ -176,11 +176,11 @@ button.btnDefault:hover {
 	left: 10px;
 }
 
-.main .labeledInputSection input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus {
+.main .labeledInputSection input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="email"]:focus {
 	outline-color: #192024;
 }
 
-.main .labeledInputSection input[type="text"]:hover, input[type="number"]:hover, input[type="password"]:hover {
+.main .labeledInputSection input[type="text"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="email"]:hover {
 	background-color: #E6EBEF;
 }
 
