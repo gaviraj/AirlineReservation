@@ -10,3 +10,7 @@
 .roles form .btnUpdate, .btnDelete {
 	margin-right: 5px;
 }
+
+.roles .dbList {
+	width: 100%;
+}

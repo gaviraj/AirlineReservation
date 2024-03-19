@@ -11,6 +11,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/flightForm.css">
 <script src="${pageContext.request.contextPath}/js/formPage.js"></script>
+<script>
+	$(".sortHeader").click(function() {
+		if ($(this).hasClass("active")) {
+			
+		}
+	})
+</script>
 </head>
 <body>
 <%@ include file="navBar.jsp" %>
@@ -123,18 +130,18 @@
 				<table class="dbList dbListData">
 				<thead>
 					<tr>
-						<th>Flight id</th>
-						<th>Flight number</th>
-						<th>Airlines</th>
-						<th>Departure city</th>
-						<th>Departure date</th>
-						<th>Departure time</th>
-						<th>Arrival city</th>
-						<th>Arrival date</th>
-						<th>Arrival time</th>
-						<th>Capacity</th>
-						<th>Seats booked</th>
-						<th>Ticket price</th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=flightId" class="sortHeader ${sortedBy == 'flightId' ? 'active' : ''}">Flight id</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=flightNumber" class="sortHeader ${sortedBy == 'flightNumber' ? 'active' : ''}">Flight number</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airlines.airlinesName" class="sortHeader ${sortedBy == 'airlines.airlinesName' ? 'active' : ''}">Airlines</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=departureCity" class="sortHeader ${sortedBy == 'departureCity' ? 'active' : ''}">Departure city</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=departureDate" class="sortHeader ${sortedBy == 'departureDate' ? 'active' : ''}">Departure date</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=departureTime" class="sortHeader ${sortedBy == 'departureTime' ? 'active' : ''}">Departure time</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=arrivalCity" class="sortHeader ${sortedBy == 'arrivalCity' ? 'active' : ''}">Arrival city</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=arrivalDate" class="sortHeader ${sortedBy == 'arrivalDate' ? 'active' : ''}">Arrival date</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=arrivalTime" class="sortHeader ${sortedBy == 'arrivalTime' ? 'active' : ''}">Arrival time</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=capacity" class="sortHeader ${sortedBy == 'capacity' ? 'active' : ''}">Capacity</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=seatsBooked" class="sortHeader ${sortedBy == 'seatsBooked' ? 'active' : ''}">Seats booked</a></th>
+						<th><a href="flightForm?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=ticketPrice" class="sortHeader ${sortedBy == 'ticketPrice' ? 'active' : ''}">Ticket price</a></th>
 						<th></th>
 					</tr>
 				</thead>
@@ -160,6 +167,25 @@
 						</core:forEach>
 					</tbody>
 				</table>
+			</div>
+			<div class="pageList">
+				<core:set var="noOfPages" value="${totalPages}"></core:set>
+				<core:set var="sortedBy" value="${sortedBy}"></core:set>
+				<core:set var="pageSize" value="${pageSize}"></core:set>
+				<core:set var="pageNo" value="${pageNo}"></core:set>
+				<%
+				for (int i = 0; i < (int)pageContext.getAttribute("noOfPages"); i++) {
+					//pageContext, out, request, response are some of jsp implicit objects
+					if (i > 0) {
+						out.println("&middot;");
+					}
+					if ((int)pageContext.getAttribute("pageNo") == i) {
+						out.println("<p>" + (i+1) + "</p>");
+					} else {
+						out.println("<a class=\"page\" href=\"flightForm?pageNo="+i+"&pageSize="+request.getAttribute("pageSize")+"&sortedBy="+request.getAttribute("sortedBy")+"\">"+(i+1)+"</a>");						
+					}
+				}
+				%>
 			</div>
 		</div>
 		<%@ include file="footer.jsp" %>

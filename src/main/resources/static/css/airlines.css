@@ -10,3 +10,7 @@
 .airlines form .btnUpdate, .btnDelete {
 	margin-right: 5px;
 }
+
+.airlines .dbList {
+	width: 100%;
+}

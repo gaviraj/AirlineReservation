@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,11 +15,14 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.synergisticit.domain.Airlines;
 import com.synergisticit.domain.Airport;
 import com.synergisticit.domain.Flight;
+import com.synergisticit.domain.Gender;
+import com.synergisticit.domain.Passenger;
 import com.synergisticit.service.AirlinesService;
 import com.synergisticit.service.AirportService;
 import com.synergisticit.service.FlightService;
@@ -37,11 +44,42 @@ public class FlightController {
 		binder.addValidators(flightValidator);
 	}
 
+//	@RequestMapping("flightForm")
+//	public ModelAndView flightsForm(Flight flight) {
+//		System.out.println("FlightController.flightsForm()...");
+//		ModelAndView mav = new ModelAndView("flightForm");
+//		mav.addObject("flights", flightService.findAll());
+//		mav.addObject("allAirlines", airlinesService.findAll());
+//		List<String> airportCities = new ArrayList<String>();
+//		for (Airport airport : airportService.findAll()) {
+//			airportCities.add(airport.getCity());
+//		}
+//		mav.addObject("cities", airportCities);
+//		mav.addObject("activeFlightForm", "active");
+//		
+//		return mav;
+//	}
+	
 	@RequestMapping("flightForm")
-	public ModelAndView flightsForm(Flight flight) {
-		System.out.println("FlightController.flightsForm()...");
+	public ModelAndView flightFormPageable(
+			Flight flight,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "7") int pageSize,
+			@RequestParam(defaultValue = "flightId") String sortedBy,
+			@RequestParam(defaultValue = "false") boolean desc
+	) {
+		System.out.println("FlightController.flightForm()...");
 		ModelAndView mav = new ModelAndView("flightForm");
-		mav.addObject("flights", flightService.findAll());
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		System.out.println("desc: " + desc);
+		if (desc) {
+			System.out.println("descending");
+			pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy).descending());
+		}
+		
+		Page<Flight> pagedFlights = flightService.findAll(pageable);
+		List<Flight> flights = pagedFlights.getContent();
+		mav.addObject("flights", flights);
 		mav.addObject("allAirlines", airlinesService.findAll());
 		List<String> airportCities = new ArrayList<String>();
 		for (Airport airport : airportService.findAll()) {
@@ -49,6 +87,10 @@ public class FlightController {
 		}
 		mav.addObject("cities", airportCities);
 		mav.addObject("activeFlightForm", "active");
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedFlights.getTotalPages());
 		
 		return mav;
 	}
@@ -74,7 +116,13 @@ public class FlightController {
 	}
 	
 	@RequestMapping("updateFlight")
-	public ModelAndView updateFlight(Flight flight) {
+	public ModelAndView updateFlight(
+			Flight flight,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "7") int pageSize,
+			@RequestParam(defaultValue = "flightId") String sortedBy,
+			@RequestParam(defaultValue = "false") boolean desc
+	) {
 		System.out.println("FlightController.updateFlight()...");
 		ModelAndView mav = new ModelAndView("flightForm");
 		flight = flightService.findById(flight.getFlightId());
@@ -87,10 +135,25 @@ public class FlightController {
 			airportCities.add(airport.getCity());
 		}
 		mav.addObject("cities", airportCities);
-		mav.addObject("flights", flightService.findAll());
+		//mav.addObject("flights", flightService.findAll());
 		mav.addObject("allAirlines", airlinesService.findAll());
 		mav.addObject("activeFlightForm", "active");
 		mav.addObject("isUpdate", true);
+		
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		System.out.println("desc: " + desc);
+		if (desc) {
+			System.out.println("descending");
+			pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy).descending());
+		}
+		
+		Page<Flight> pagedFlights = flightService.findAll(pageable);
+		List<Flight> flights = pagedFlights.getContent();
+		mav.addObject("flights", flights);
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedFlights.getTotalPages());
 		
 		return mav;
 	}

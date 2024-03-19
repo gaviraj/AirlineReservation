@@ -3,6 +3,8 @@ package com.synergisticit.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,11 @@ public class UserServiceImp implements UserService {
 	public User findByEmail(String email) {
 		//return userRepository.findByEmail(email);
 		return userDao.findByEmail(email);
+	}
+
+	@Override
+	public Page<User> findAll(Pageable pageable) {
+		return userRepository.findAll(pageable);
 	}
 
 }

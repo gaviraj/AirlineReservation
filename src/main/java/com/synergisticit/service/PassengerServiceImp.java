@@ -3,6 +3,8 @@ package com.synergisticit.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.synergisticit.domain.Passenger;
@@ -32,6 +34,11 @@ public class PassengerServiceImp implements PassengerService {
 	public void deleteById(Long passengerId) {
 		passengerRepository.deleteById(passengerId);
 
+	}
+
+	@Override
+	public Page<Passenger> findAll(Pageable pageable) {
+		return passengerRepository.findAll(pageable);
 	}
 
 }

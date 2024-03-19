@@ -50,3 +50,7 @@
 	display: inline-block;
 	max-width: 170px;
 }
+
+.users .dbList {
+	width: 100%;
+}

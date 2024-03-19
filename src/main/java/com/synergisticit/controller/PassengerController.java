@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -21,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.synergisticit.domain.Flight;
 import com.synergisticit.domain.Gender;
 import com.synergisticit.domain.Passenger;
+import com.synergisticit.domain.Reservation;
 import com.synergisticit.service.FlightService;
 import com.synergisticit.service.PassengerService;
 import com.synergisticit.validation.PassengerValidator;
@@ -133,14 +138,38 @@ public class PassengerController {
 		return mav;
 	}
 	
+//	@RequestMapping("passengers")
+//	@Secured({"DBA", "Admin"})
+//	public ModelAndView passengers(Passenger passenger) {
+//		System.out.println("PassengerController.passengers()...");
+//		ModelAndView mav = new ModelAndView("passengers");
+//		mav.addObject("passengers", passengerService.findAll());
+//		mav.addObject("genders", Gender.values());
+//		mav.addObject("activePassengers", "active");
+//		
+//		return mav;
+//	}
+	
 	@RequestMapping("passengers")
 	@Secured({"DBA", "Admin"})
-	public ModelAndView passengers(Passenger passenger) {
+	public ModelAndView reservationsPageable(
+			Passenger passenger,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "7") int pageSize,
+			@RequestParam(defaultValue = "passengerId") String sortedBy
+	) {
 		System.out.println("PassengerController.passengers()...");
 		ModelAndView mav = new ModelAndView("passengers");
-		mav.addObject("passengers", passengerService.findAll());
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		Page<Passenger> pagedPassengers = passengerService.findAll(pageable);
+		List<Passenger> passengers = pagedPassengers.getContent();
+		mav.addObject("passengers", passengers);
 		mav.addObject("genders", Gender.values());
 		mav.addObject("activePassengers", "active");
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedPassengers.getTotalPages());
 		
 		return mav;
 	}
@@ -164,16 +193,30 @@ public class PassengerController {
 	
 	@RequestMapping("updatePassenger")
 	@Secured({"DBA", "Admin"})
-	public ModelAndView updatePassenger(Passenger passenger) {
+	public ModelAndView updatePassenger(
+			Passenger passenger,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "7") int pageSize,
+			@RequestParam(defaultValue = "passengerId") String sortedBy
+	) {
 		System.out.println("PassengerController.updatePassenger()...");
 		ModelAndView mav = new ModelAndView("passengers");
 		passenger = passengerService.findById(passenger.getPassengerId());
 		mav.addObject("passenger", passenger);
-		mav.addObject("passengers", passengerService.findAll());
+		//mav.addObject("passengers", passengerService.findAll());
 		mav.addObject("genders", Gender.values());
 		mav.addObject("passengerGender", passenger.getGender());
 		mav.addObject("activePassengers", "active");
 		mav.addObject("isUpdate", true);
+		
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		Page<Passenger> pagedPassengers = passengerService.findAll(pageable);
+		List<Passenger> passengers = pagedPassengers.getContent();
+		mav.addObject("passengers", passengers);
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedPassengers.getTotalPages());
 		
 		return mav;
 	}

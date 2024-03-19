@@ -1,6 +1,12 @@
 package com.synergisticit.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -8,8 +14,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.synergisticit.domain.Airlines;
 import com.synergisticit.domain.Airport;
 import com.synergisticit.domain.Role;
 import com.synergisticit.service.AirportService;
@@ -31,13 +39,36 @@ public class AirportController {
 		binder.addValidators(airportValidator);
 	}
 	
+//	@RequestMapping("airports")
+//	public ModelAndView airports(Airport airport) {
+//		System.out.println("AirportController.airports()...");
+//		ModelAndView mav = new ModelAndView("airports");
+//		mav.addObject("airports", airportService.findAll());
+//		mav.addObject("flights", flightService.findAll());
+//		mav.addObject("activeAirports", "active");
+//		
+//		return mav;
+//	} 
+	
 	@RequestMapping("airports")
-	public ModelAndView airports(Airport airport) {
+	public ModelAndView airports(
+			Airport airport,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "7") int pageSize,
+			@RequestParam(defaultValue = "airportId") String sortedBy
+	) {
 		System.out.println("AirportController.airports()...");
 		ModelAndView mav = new ModelAndView("airports");
-		mav.addObject("airports", airportService.findAll());
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		Page<Airport> pagedAirports = airportService.findAll(pageable);
+		List<Airport> airports = pagedAirports.getContent();
+		mav.addObject("airports", airports);
 		mav.addObject("flights", flightService.findAll());
 		mav.addObject("activeAirports", "active");
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedAirports.getTotalPages());
 		
 		return mav;
 	} 
@@ -58,15 +89,29 @@ public class AirportController {
 	} 
 	
 	@RequestMapping("updateAirport")
-	public ModelAndView updateAirport(Airport airport) {
+	public ModelAndView updateAirport(
+			Airport airport,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "7") int pageSize,
+			@RequestParam(defaultValue = "airportId") String sortedBy
+	) {
 		System.out.println("AirportController.updateAirport()...");
 		ModelAndView mav = new ModelAndView("airports");
 		airport = airportService.findById(airport.getAirportId());
 		mav.addObject("airport", airport);
-		mav.addObject("airports", airportService.findAll());
+		//mav.addObject("airports", airportService.findAll());
 		mav.addObject("flights", flightService.findAll());
 		mav.addObject("activeAirports", "active");
 		mav.addObject("isUpdate", true);
+		
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		Page<Airport> pagedAirports = airportService.findAll(pageable);
+		List<Airport> airports = pagedAirports.getContent();
+		mav.addObject("airports", airports);
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedAirports.getTotalPages());
 		
 		return mav;
 	}

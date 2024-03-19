@@ -102,12 +102,12 @@
 				<table class="dbList dbListData">
 				<thead>
 					<tr>
-						<th>Passenger id</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Phone</th>
-						<th>Gender</th>
-						<th>DOB</th>
+						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=passengerId" class="sortHeader ${sortedBy == 'passengerId' ? 'active' : ''}">Passenger id</a></th>
+						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=firstName" class="sortHeader ${sortedBy == 'firstName' ? 'active' : ''}">Name</a></th>
+						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=email" class="sortHeader ${sortedBy == 'email' ? 'active' : ''}">Email</a></th>
+						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=phoneNum" class="sortHeader ${sortedBy == 'phoneNum' ? 'active' : ''}">Phone</a></th>
+						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=gender" class="sortHeader ${sortedBy == 'gender' ? 'active' : ''}">Gender</a></th>
+						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=dob" class="sortHeader ${sortedBy == 'dob' ? 'active' : ''}">DOB</a></th>
 						<th>Address</th>
 						<th></th>
 					</tr>
@@ -132,6 +132,25 @@
 						</core:forEach>
 					</tbody>
 				</table>
+			</div>
+			<div class="pageList">
+				<core:set var="noOfPages" value="${totalPages}"></core:set>
+				<core:set var="sortedBy" value="${sortedBy}"></core:set>
+				<core:set var="pageSize" value="${pageSize}"></core:set>
+				<core:set var="pageNo" value="${pageNo}"></core:set>
+				<%
+				for (int i = 0; i < (int)pageContext.getAttribute("noOfPages"); i++) {
+					//pageContext, out, request, response are some of jsp implicit objects
+					if (i > 0) {
+						out.println("&middot;");
+					}
+					if ((int)pageContext.getAttribute("pageNo") == i) {
+						out.println("<p>" + (i+1) + "</p>");
+					} else {
+						out.println("<a class=\"page\" href=\"passengers?pageNo="+i+"&pageSize="+request.getAttribute("pageSize")+"&sortedBy="+request.getAttribute("sortedBy")+"\">"+(i+1)+"</a>");
+					}
+				}
+				%>
 			</div>
 		</div>
 		<%@ include file="footer.jsp" %>

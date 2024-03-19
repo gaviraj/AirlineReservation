@@ -68,10 +68,10 @@
 				<table class="dbList dbListData">
 				<thead>
 					<tr>
-						<th>Airport id</th>
-						<th>Airport code</th>
-						<th>Airport name</th>
-						<th>City</th>
+						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airportId" class="sortHeader ${sortedBy == 'airportId' ? 'active' : ''}">Airport id</a></th>
+						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airportCode" class="sortHeader ${sortedBy == 'airportCode' ? 'active' : ''}">Airport code</a></th>
+						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airportName" class="sortHeader ${sortedBy == 'airportName' ? 'active' : ''}">Airport name</a></th>
+						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=city" class="sortHeader ${sortedBy == 'city' ? 'active' : ''}">City</a></th>
 						<th>Arrival Flights</th>
 						<th>Departure Flights</th>
 						<th></th>
@@ -109,6 +109,25 @@
 						</core:forEach>
 					</tbody>
 				</table>
+			</div>
+			<div class="pageList">
+				<core:set var="noOfPages" value="${totalPages}"></core:set>
+				<core:set var="sortedBy" value="${sortedBy}"></core:set>
+				<core:set var="pageSize" value="${pageSize}"></core:set>
+				<core:set var="pageNo" value="${pageNo}"></core:set>
+				<%
+				for (int i = 0; i < (int)pageContext.getAttribute("noOfPages"); i++) {
+					//pageContext, out, request, response are some of jsp implicit objects
+					if (i > 0) {
+						out.println("&middot;");
+					}
+					if ((int)pageContext.getAttribute("pageNo") == i) {
+						out.println("<p>" + (i+1) + "</p>");
+					} else {
+						out.println("<a class=\"page\" href=\"flightForm?pageNo="+i+"&pageSize="+request.getAttribute("pageSize")+"&sortedBy="+request.getAttribute("sortedBy")+"\">"+(i+1)+"</a>");						
+					}
+				}
+				%>
 			</div>
 		</div>
 		<%@ include file="footer.jsp" %>

@@ -2,6 +2,9 @@ package com.synergisticit.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.synergisticit.domain.User;
 
 public interface UserService {
@@ -17,4 +20,6 @@ public interface UserService {
 	public User findByUsername(String username);
 	
 	User findByEmail(String email);
+	
+	Page<User> findAll(Pageable pageable);
 }

@@ -95,13 +95,18 @@
 				<core:set var="noOfPages" value="${totalPages}"></core:set>
 				<core:set var="sortedBy" value="${sortedBy}"></core:set>
 				<core:set var="pageSize" value="${pageSize}"></core:set>
+				<core:set var="pageNo" value="${pageNo}"></core:set>
 				<%
 				for (int i = 0; i < (int)pageContext.getAttribute("noOfPages"); i++) {
 					//pageContext, out, request, response are some of jsp implicit objects
 					if (i > 0) {
 						out.println("&middot;");
 					}
-					out.println("<a class=\"page\" href=\"reservations?pageNo="+i+"&pageSize="+request.getAttribute("pageSize")+"&sortedBy="+request.getAttribute("sortedBy")+"\">"+(i+1)+"</a>");
+					if ((int)pageContext.getAttribute("pageNo") == i) {
+						out.println("<p>" + (i+1) + "</p>");
+					} else {
+						out.println("<a class=\"page\" href=\"reservations?pageNo="+i+"&pageSize="+request.getAttribute("pageSize")+"&sortedBy="+request.getAttribute("sortedBy")+"\">"+(i+1)+"</a>");						
+					}
 				}
 				%>
 			</div>
