@@ -108,7 +108,7 @@
 						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=phoneNum" class="sortHeader ${sortedBy == 'phoneNum' ? 'active' : ''}">Phone</a></th>
 						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=gender" class="sortHeader ${sortedBy == 'gender' ? 'active' : ''}">Gender</a></th>
 						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=dob" class="sortHeader ${sortedBy == 'dob' ? 'active' : ''}">DOB</a></th>
-						<th>Address</th>
+						<th><a href="passengers?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=address" class="sortHeader ${sortedBy == 'address' ? 'active' : ''}">Address</a></th>
 						<th></th>
 					</tr>
 				</thead>

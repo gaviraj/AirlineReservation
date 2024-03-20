@@ -64,7 +64,7 @@
 						<th><a href="airlines?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airlinesId" class="sortHeader ${sortedBy == 'airlinesId' ? 'active' : ''}">Airlines id</a></th>
 						<th><a href="airlines?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airlinesName" class="sortHeader ${sortedBy == 'airlinesName' ? 'active' : ''}">Airlines name</a></th>
 						<th><a href="airlines?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airlinesCode" class="sortHeader ${sortedBy == 'airlinesCode' ? 'active' : ''}">Airlines code</a></th>
-						<th>Flights</th>
+						<th><a href="airlines?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=flights" class="sortHeader ${sortedBy == 'flights' ? 'active' : ''}">Flights</a></th>
 						<th></th>
 					</tr>
 				</thead>

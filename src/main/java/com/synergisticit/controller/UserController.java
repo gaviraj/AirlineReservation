@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.synergisticit.domain.Reservation;
+import com.synergisticit.domain.Role;
 import com.synergisticit.domain.User;
 import com.synergisticit.service.ReservationService;
 import com.synergisticit.service.RoleService;
@@ -41,12 +46,26 @@ public class UserController {
 	
 	@RequestMapping("users")
 	@Secured({"DBA", "Admin"})
-	public ModelAndView users(User user) {
+	public ModelAndView users(
+			User user,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "5") int pageSize,
+			@RequestParam(defaultValue = "userId") String sortedBy
+	) {
 		System.out.println("UserController.users()...");
 		ModelAndView mav = new ModelAndView("users");
-		mav.addObject("users", userService.findAll());
+		//mav.addObject("users", userService.findAll());
 		mav.addObject("roles", roleService.findAll());
 		mav.addObject("activeUsers", "active");
+		
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		Page<User> pagedUsers = userService.findAll(pageable);
+		List<User> users = pagedUsers.getContent();
+		mav.addObject("users", users);
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedUsers.getTotalPages());
 		
 		return mav;
 	}

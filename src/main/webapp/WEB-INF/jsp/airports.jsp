@@ -72,8 +72,8 @@
 						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airportCode" class="sortHeader ${sortedBy == 'airportCode' ? 'active' : ''}">Airport code</a></th>
 						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=airportName" class="sortHeader ${sortedBy == 'airportName' ? 'active' : ''}">Airport name</a></th>
 						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=city" class="sortHeader ${sortedBy == 'city' ? 'active' : ''}">City</a></th>
-						<th>Arrival Flights</th>
-						<th>Departure Flights</th>
+						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=arrivalFlights" class="sortHeader ${sortedBy == 'arrivalFlights' ? 'active' : ''}">Arrival Flights</a></th>
+						<th><a href="airports?pageNo=${pageNo}&pageSize=${pageSize}&sortedBy=departureFlights" class="sortHeader ${sortedBy == 'departureFlights' ? 'active' : ''}">Departure Flights</a></th>
 						<th></th>
 					</tr>
 				</thead>

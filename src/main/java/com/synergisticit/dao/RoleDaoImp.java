@@ -56,7 +56,7 @@ public class RoleDaoImp implements RoleDao {
 
 	@Override
 	public void deleteById(Long roleId) {
-		String sql = "DELETE FROM ROW WHERE ROLEID = :roleId;";
+		String sql = "DELETE FROM ROLE WHERE ROLEID = :roleId;";
 		MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 		mapSqlParameterSource.addValue("roleId", roleId);
 		
