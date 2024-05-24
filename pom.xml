@@ -15,9 +15,9 @@
 	<description>Airline Reservation</description>
 	<properties>
 		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
+		<!-- <maven.compiler.source>17</maven.compiler.source>
  		<maven.compiler.target>17</maven.compiler.target>
- 		<maven.compiler.release>17</maven.compiler.release>
+ 		<maven.compiler.release>17</maven.compiler.release> -->
 	</properties>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -87,6 +87,14 @@
 	</dependencies>
 
 	<build>
+ 		<plugins>
+ 			<plugin>
+ 				<groupId>org.springframework.boot</groupId>
+ 				<artifactId>spring-boot-maven-plugin</artifactId>
+ 			</plugin>
+ 		</plugins>
+ 	</build>
+	<!-- <build>
 	    <pluginManagement>
 	        <plugins>
 	            <plugin>
@@ -94,9 +102,8 @@
 	                <artifactId>maven-compiler-plugin</artifactId>
 	                <version>3.10.1</version>
 	            </plugin>
-	            <!-- Other plugins -->
 	        </plugins>
 	    </pluginManagement>
-	</build>
+	</build> -->
 
 </project>
