@@ -84,24 +84,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-<dependency>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.11.0</version>
-</dependency>
-
 	</dependencies>
 
-	<!--<build>
+	<build>
  		<plugins>
  			<plugin>
  				<groupId>org.springframework.boot</groupId>
  				<artifactId>spring-boot-maven-plugin</artifactId>
  			</plugin>
  		</plugins>
- 	</build>-->
-	<build>
+ 	</build>
+	<!-- <build>
 	    <pluginManagement>
 	        <plugins>
 	            <plugin>
@@ -111,6 +104,6 @@
 	            </plugin>
 	        </plugins>
 	    </pluginManagement>
-	</build>
+	</build> -->
 
 </project>
