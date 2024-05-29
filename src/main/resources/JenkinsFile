@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Build and Test') {
     environment {
-        SONAR_URL = JENKINS_URL.substring(0, JENKINS_URL.lastIndexOf(":"))
+        SONAR_URL = JENKINS_URL.substring(0, JENKINS_URL.lastIndexOf(":")).concat(":9000")
       }
       steps {
         sh 'ls -ltr'
