@@ -18,8 +18,8 @@ pipeline {
         // build the project and create a JAR file
         //sh 'cd spring-boot-app && mvn clean package'
         sh 'mvn -v'
-        sh 'mvn -X clean package'
         sh 'echo ${JENKINS_URL}'
+        sh 'mvn -X clean package'
       }
     }
     stage('Static Code Analysis') {
