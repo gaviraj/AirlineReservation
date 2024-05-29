@@ -13,12 +13,15 @@ pipeline {
       }
     }
     stage('Build and Test') {
+    environment {
+        SONAR_URL = JENKINS_URL.substring(0, JENKINS_URL.lastIndexOf(":"))
+      }
       steps {
         sh 'ls -ltr'
         // build the project and create a JAR file
         //sh 'cd spring-boot-app && mvn clean package'
         sh 'mvn -v'
-        sh 'echo ${JENKINS_URL}'
+        sh 'echo ${SONAR_URL}'
         sh 'mvn -X clean package'
       }
     }
