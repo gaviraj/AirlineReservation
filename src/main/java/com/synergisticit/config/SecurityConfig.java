@@ -53,6 +53,7 @@ public class SecurityConfig {
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/register")).permitAll()
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/addPassengers")).permitAll()
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/addPassengers/**")).permitAll()
+		.requestMatchers(AntPathRequestMatcher.antMatcher("/updateUser/**")).permitAll()
 		//.requestMatchers(AntPathRequestMatcher.antMatcher("/branches/**")).permitAll()
 		.requestMatchers(staticResources).permitAll() //permit static files without authentication
 		.requestMatchers(AntPathRequestMatcher.antMatcher("/WEB-INF/jsp/**")).permitAll()

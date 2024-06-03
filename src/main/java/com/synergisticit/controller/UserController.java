@@ -87,16 +87,29 @@ public class UserController {
 	}
 	
 	@RequestMapping("updateUser")
-	public ModelAndView updateUser(User user) {
+	public ModelAndView updateUser(
+			User user,
+			@RequestParam(defaultValue = "0") int pageNo,
+			@RequestParam(defaultValue = "5") int pageSize,
+			@RequestParam(defaultValue = "userId") String sortedBy
+		) {
 		System.out.println("UserController.updateUser()...");
 		ModelAndView mav = new ModelAndView("users");
 		user = userService.findById(user.getUserId());
 		mav.addObject("user", user);
 		mav.addObject("userRoles", user.getRoles());
-		mav.addObject("users", userService.findAll());
+		
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortedBy));
+		Page<User> pagedUsers = userService.findAll(pageable);
+		List<User> users = pagedUsers.getContent();
+		mav.addObject("users", users);
 		mav.addObject("roles", roleService.findAll());
 		mav.addObject("activeUsers", "active");
 		mav.addObject("isUpdate", true);
+		mav.addObject("pageNo", pageNo);
+		mav.addObject("pageSize", pageSize);
+		mav.addObject("sortedBy", sortedBy);
+		mav.addObject("totalPages", pagedUsers.getTotalPages());
 		
 		return mav;
 	}
