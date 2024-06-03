@@ -24,14 +24,14 @@
 			<form action="login" method="POST">
 				<div class="formSection labeledInputSection">
 					<label for="username"><img src="${pageContext.request.contextPath}/img/signature-solid.svg" />
-						<input type="text" name="username" placeholder="Username" />
+						<input type="text" name="username" id="username" placeholder="Username" />
 					</label>
 				</div>
 				<br>
 				<br>
 				<div class="formSection labeledInputSection">
-					<label for="username"><img src="${pageContext.request.contextPath}/img/key-solid.svg" />
-						<input type="password" onfocus="(this.type='text')" onblur="(this.type='password')" name="password" placeholder="Password" />
+					<label for="password"><img src="${pageContext.request.contextPath}/img/key-solid.svg" />
+						<input type="password" onfocus="(this.type='text')" onblur="(this.type='password')" name="password" id="password" placeholder="Password" />
 					</label>
 				</div>
 				<br>
